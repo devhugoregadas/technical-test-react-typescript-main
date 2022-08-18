@@ -77,8 +77,8 @@ export default function App() {
         ></input>
         <label htmlFor="powerThres">Power threshold</label>
         <input
-          type="string"
-          value={powerThres}
+          type="number"
+          value={powerThres.toString()}
           id="powerThres"
           data-testid="power-input"
           min={0}
@@ -93,7 +93,7 @@ export default function App() {
       </div>
 
       <div className="flex gap-6">
-        <table className="table-collapse flex-1">
+        <table className="table-collapse flex-1 h-fit">
           <thead>
             <tr className="">
               <th className="">ID</th>

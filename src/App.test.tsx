@@ -1,16 +1,38 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import {
+  render,
+  screen,
+  waitFor
+
+} from "@testing-library/react";
 import "./setupTests";
 
 import App from "./App";
+import userEvent from "@testing-library/user-event";
 
-describe("Test App component", () => {
-  beforeEach(() => {
-    jest.resetModules();
+describe("Tests Collection Name", () => {
+
+  it("Power", async () => {
+    const { container } = render(<App />);
+
+    userEvent.type(screen.getByRole("spinbutton"), "400");
+    await waitFor(() => {
+      expect(screen.getByLabelText("Power threshold")).toHaveValue(400);
+    });
+
   });
+  it("Search By Pokemon name", async () => {
+    const { container,rerender,debug } = render(<App />);
 
-  it("should show correct search text", () => {
-    const { baseElement } = render(<App />);
-    expect(baseElement).toBeTruthy();
+    userEvent.type(screen.getByRole("textbox"), "Bulbasaur");
+
+    await waitFor(() => {
+      expect(screen.getByTestId("pokemon-name")).toHaveValue("Bulbasaur");
+     
+    });
+
+   
   });
 });
+
+
